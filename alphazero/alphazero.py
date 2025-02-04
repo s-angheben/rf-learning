@@ -5,8 +5,8 @@ import mctx
 import pgx
 from pydantic import BaseModel
 from omegaconf import OmegaConf
-#from .network import AZNet
-from network import AZNet
+from .network import AZNet
+#from network import AZNet
 
 
 devices = jax.local_devices()
@@ -82,6 +82,17 @@ def recurrent_fn(model, rng_key: jnp.ndarray, action: jnp.ndarray, state: pgx.St
     return recurrent_fn_output, state
 
 def play_model(model, state, key):
+    def forward_fn(x, is_eval=False):
+        net = AZNet(
+            num_actions=env.num_actions,
+            num_channels=config.num_channels,
+            num_blocks=config.num_layers,
+            resnet_v2=config.resnet_v2,
+        )
+        policy_out, value_out = net(x, is_training=not is_eval, test_local_stats=False)
+        return policy_out, value_out
+    forward = hk.without_apply_rng(hk.transform_with_state(forward_fn))
+
     model_params, model_state = model
 
     (logits, value), _ = forward.apply(
@@ -96,6 +107,83 @@ def play_model(model, state, key):
     return action
 
 def play_mcts_model(model, state, key):
+    def forward_fn(x, is_eval=False):
+        net = AZNet(
+            num_actions=env.num_actions,
+            num_channels=config.num_channels,
+            num_blocks=config.num_layers,
+            resnet_v2=config.resnet_v2,
+        )
+        policy_out, value_out = net(x, is_training=not is_eval, test_local_stats=False)
+        return policy_out, value_out
+    forward = hk.without_apply_rng(hk.transform_with_state(forward_fn))
+
+    model_params, model_state = model
+
+    (logits, value), _ = forward.apply(
+            model_params, model_state, state.observation, is_eval=False
+    )
+
+    root = mctx.RootFnOutput(prior_logits=logits, value=value, embedding=state)
+
+    po = mctx.gumbel_muzero_policy(
+        params=model,
+        rng_key=key,
+        root=root,
+        recurrent_fn=recurrent_fn,
+        num_simulations=config.num_simulations,
+        invalid_actions=~state.legal_action_mask,
+        qtransform=mctx.qtransform_completed_by_mix_value,
+        gumbel_scale=1.0,
+    )
+    
+    logits = po.action_weights
+
+    logits = logits - jnp.max(logits, axis=-1, keepdims=True)
+    logits = jnp.where(state.legal_action_mask, logits, jnp.finfo(logits.dtype).min)
+
+    action = logits.argmax(axis=1)
+
+    return action
+
+
+def play_model_small(model, state, key):
+    def forward_fn(x, is_eval=False):
+        net = AZNet(
+            num_actions=env.num_actions,
+            num_channels=64,
+            num_blocks=5,
+            resnet_v2=config.resnet_v2,
+        )
+        policy_out, value_out = net(x, is_training=not is_eval, test_local_stats=False)
+        return policy_out, value_out
+    forward = hk.without_apply_rng(hk.transform_with_state(forward_fn))
+
+    model_params, model_state = model
+
+    (logits, value), _ = forward.apply(
+            model_params, model_state, state.observation, is_eval=False
+    )
+
+    logits = logits - jnp.max(logits, axis=-1, keepdims=True)
+    logits = jnp.where(state.legal_action_mask, logits, jnp.finfo(logits.dtype).min)
+
+    action = logits.argmax(axis=1)
+
+    return action
+
+def play_mcts_model_small(model, state, key):
+    def forward_fn(x, is_eval=False):
+        net = AZNet(
+            num_actions=env.num_actions,
+            num_channels=64,
+            num_blocks=5,
+            resnet_v2=config.resnet_v2,
+        )
+        policy_out, value_out = net(x, is_training=not is_eval, test_local_stats=False)
+        return policy_out, value_out
+    forward = hk.without_apply_rng(hk.transform_with_state(forward_fn))
+
     model_params, model_state = model
 
     (logits, value), _ = forward.apply(
