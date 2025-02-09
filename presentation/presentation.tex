@@ -461,16 +461,56 @@ V(S_t) \approx \hat{V}(S_t) = v'
 \section{Alphazero}
 %------------------------------------------------
 
+\begin{frame}{\makebox[0.95\linewidth][l]{Description \hfill \textcolor{lightgray}{\insertsection}}}
+    Alphazero algorithm
+
+    \medskip
+    \begin{itemize}
+    \item MCTS
+            \begin{itemize}
+                \item policy: neural network policy head
+                \item value: neural network value head
+            \end{itemize}
+    \item neural network function approximation
+\end{itemize}
+\end{frame}
+
 \begin{frame}{\makebox[0.95\linewidth][l]{Pseudocode \hfill \textcolor{lightgray}{\insertsection}}}
     \begin{textblock*}{\paperwidth}(0mm,18mm) % Position at (0,0)
         \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{alphazero_algo.png}
     \end{textblock*}
 \end{frame}
 
-\begin{frame}{\makebox[0.95\linewidth][l]{Example Network forward\hfill \textcolor{lightgray}{\insertsection}}}
+\begin{frame}{\makebox[0.95\linewidth][l]{Loss \hfill \textcolor{lightgray}{\insertsection}}}
+    \textbf{Total Loss:}
+    \[
+    L = \mathcal{L}_{\text{policy}} + \mathcal{L}_{\text{value}} 
+    \]
+
+    \vspace{0.3cm}
+    \textbf{Where:}
+    \[
+        \mathcal{L}_{\text{policy}} = - \mathbb{E}_{a \sim policy\_out} \left[ \log \hat{\pi}(a)  \right]
+    \]
+    \[
+    \mathcal{L}_{\text{value}} = \mathbb{E} \left[ \left( \hat{V}(S_t) - G_t \right)^2  \right]
+    \]
+
+\end{frame}
+
+\begin{frame}{\makebox[0.95\linewidth][l]{Loss plot \hfill \textcolor{lightgray}{\insertsection}}}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{network_forward.png}
+    \includegraphics[width=0.9\textwidth]{alphazero_loss_plot1.png}
+    \label{fig:intro}
+\end{figure}
+\end{frame}
+
+\begin{frame}{\makebox[0.95\linewidth][l]{Loss plot 2 \hfill \textcolor{lightgray}{\insertsection}}}
+With better training: increase num. MCTS simulation, batch size, neural network
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{alphazero_loss_plot2.png}
     \label{fig:intro}
 \end{figure}
 \end{frame}
@@ -483,7 +523,35 @@ V(S_t) \approx \hat{V}(S_t) = v'
 \end{figure}
 \end{frame}
 
+\begin{frame}{\makebox[0.95\linewidth][l]{Example Network forward\hfill \textcolor{lightgray}{\insertsection}}}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{network_forward.png}
+    \label{fig:intro}
+\end{figure}
+\end{frame}
+
+
 %------------------------------------------------
+\section{Conclusion}
+%------------------------------------------------
+\begin{frame}{\makebox[0.95\linewidth][l]{Evaluation \hfill \textcolor{lightgray}{\insertsection}}}
+    \Huge{\centerline{\textbf{Notebook games and live play}}}
+\end{frame}
+
+\begin{frame}{\makebox[0.95\linewidth][l]{Future Experiments \hfill \textcolor{lightgray}{\insertsection}}}
+    \begin{itemize}
+    \item hyper-parameter tuning for better training
+    \item longer training
+    \item network architecture
+            \begin{itemize}
+                \item increase capacity
+                \item transformer architecture
+            \end{itemize}
+
+    \item MCTS: test different selection algorithm
+\end{itemize}
+\end{frame}
 
 \begin{frame}{References}
     \footnotesize
