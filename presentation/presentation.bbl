@@ -1,0 +1,32 @@
+\begin{thebibliography}{}
+
+\bibitem[Danihelka et~al., 2022]{danihelka2022policy}
+Danihelka, I., Guez, A., Schrittwieser, J., and Silver, D. (2022).
+\newblock Policy improvement by planning with gumbel.
+\newblock \url{https://www.openreview.net/forum?id=bERaNdoegnO}.
+\newblock Accessed: 2025-02-07.
+
+\bibitem[Koyamada et~al., 2024]{koyamada2024pgxhardwareacceleratedparallelgame}
+Koyamada, S., Okano, S., Nishimori, S., Murata, Y., Habara, K., Kita, H., and
+  Ishii, S. (2024).
+\newblock Pgx: Hardware-accelerated parallel game simulators for reinforcement
+  learning.
+
+\bibitem[Silver et~al., 2016]{silver2016mastering}
+Silver, D., Huang, A., Maddison, C.~J., and et~al. (2016).
+\newblock Mastering the game of go with deep neural networks and tree search.
+\newblock {\em Nature}, 529(7587):484--489.
+
+\bibitem[Silver et~al., 2017a]{silver2017masteringchessshogiselfplay}
+Silver, D., Hubert, T., Schrittwieser, J., Antonoglou, I., Lai, M., Guez, A.,
+  Lanctot, M., Sifre, L., Kumaran, D., Graepel, T., Lillicrap, T., Simonyan,
+  K., and Hassabis, D. (2017a).
+\newblock Mastering chess and shogi by self-play with a general reinforcement
+  learning algorithm.
+
+\bibitem[Silver et~al., 2017b]{silver2017mastering}
+Silver, D., Schrittwieser, J., Simonyan, K., and et~al. (2017b).
+\newblock Mastering the game of go without human knowledge.
+\newblock {\em Nature}, 550:354--359.
+
+\end{thebibliography}

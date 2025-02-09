@@ -110,7 +110,8 @@ The objective of this project is to explore different reinforcement learning alg
 %------------------------------------------------
 
 \begin{frame}{\makebox[0.95\linewidth][l]{Framework \hfill \textcolor{lightgray}{\insertsection}}}
-\textbf{Framework:} JAX for computational efficiency and flexibility, enabling generalization to various games.  Abstraction of MCTS, network training, and game dynamics for modularity and scalability. 
+
+\textbf{Framework:} JAX provides a high-performance framework for computational efficiency and flexibility, allowing for scalable and efficient development of machine learning algorithm.
 
 \vspace{2.5em}
 
@@ -126,14 +127,16 @@ The objective of this project is to explore different reinforcement learning alg
 
 %------------------------------------------------
 
-\begin{frame}{\makebox[0.95\linewidth][l]{Libraries \hfill \textcolor{lightgray}{\insertsection}}}
+
+\begin{frame}{\makebox[0.95\linewidth][l]{Libraries with links \hfill \textcolor{lightgray}{\insertsection}}}
 \begin{itemize}
-    \item \texttt{mctx}: JAX-native MCTS implementations.
-    \item \texttt{pgx}: Game environment simulation, diverse games, fast parallelization.
-    \item \texttt{Haiku}: Neural network building and training in JAX.
-    \item \texttt{optax}: Gradient processing and optimization.
+    \item \href{https://github.com/google-deepmind/mctx}{\texttt{mctx}}: JAX-native MCTS implementations.
+    \item \href{https://github.com/sotetsuk/pgx}{\texttt{pgx}}: Game environment simulation, diverse games, fast parallelization.
+    \item \href{https://github.com/google-deepmind/dm-haiku}{\texttt{Haiku}}: Neural network building and training in JAX.
+    \item \href{https://github.com/deepmind/optax}{\texttt{optax}}: Gradient processing and optimization.
 \end{itemize}
 \end{frame}
+
 
 %------------------------------------------------
 \section{MCTS Review}
@@ -337,11 +340,13 @@ V(S_t) \approx \hat{V}(S_t) = v'
     \centering
     \includegraphics[width=0.9\textwidth]{state.png}
     \label{fig:intro}
+    Value = [-1, -1]
 \end{figure}
         \column{.45\textwidth} % Left column and width
 \begin{figure}[h]
+    Policy output
     \centering
-    \includegraphics[width=0.7\textwidth]{prob.png}
+    \includegraphics[width=0.7\textwidth]{prob2.png}
     \label{fig:intro}
 \end{figure}
     \end{columns}
@@ -364,7 +369,7 @@ V(S_t) \approx \hat{V}(S_t) = v'
 \end{frame}
 
 \begin{frame}{\makebox[0.95\linewidth][l]{Pseudocode \hfill \textcolor{lightgray}{\insertsection}}}
-    \begin{textblock*}{\paperwidth}(0mm,30mm) % Position at (0,0)
+    \begin{textblock*}{\paperwidth}(0mm,20mm) % Position at (0,0)
         \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{reinforce_algo.png}
     \end{textblock*}
 \end{frame}
@@ -457,7 +462,7 @@ V(S_t) \approx \hat{V}(S_t) = v'
 %------------------------------------------------
 
 \begin{frame}{\makebox[0.95\linewidth][l]{Pseudocode \hfill \textcolor{lightgray}{\insertsection}}}
-    \begin{textblock*}{\paperwidth}(0mm,30mm) % Position at (0,0)
+    \begin{textblock*}{\paperwidth}(0mm,18mm) % Position at (0,0)
         \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{alphazero_algo.png}
     \end{textblock*}
 \end{frame}
@@ -470,11 +475,19 @@ V(S_t) \approx \hat{V}(S_t) = v'
 \end{figure}
 \end{frame}
 
+\begin{frame}{\makebox[0.95\linewidth][l]{Inference MCTS vs One-shot\hfill \textcolor{lightgray}{\insertsection}}}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{inference.png}
+    \label{fig:intro}
+\end{figure}
+\end{frame}
 
 %------------------------------------------------
 
 \begin{frame}{References}
     \footnotesize
+    \nocite{*}
     \bibliography{reference.bib}
     \bibliographystyle{apalike}
 \end{frame}
