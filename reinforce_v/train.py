@@ -47,16 +47,16 @@ def selfplay(model, rng_key: jnp.ndarray) -> SelfplayOutput:
         logits = logits - jnp.max(logits, axis=-1, keepdims=True)
         logits = jnp.where(state.legal_action_mask, logits, jnp.finfo(logits.dtype).min)
 
-        # action = jax.random.categorical(key1, logits, axis=-1)
+        action = jax.random.categorical(key1, logits, axis=-1)
 
         # epsilon-greedy
-        action = jax.lax.cond(
-            jax.random.uniform(key1) < epsilon,
-            lambda: jax.random.categorical(
-                key2, state.legal_action_mask.astype(jnp.float32), axis=-1
-            ),
-            lambda: jax.random.categorical(key2, logits, axis=-1),
-        )
+        #action = jax.lax.cond(
+        #    jax.random.uniform(key1) < epsilon,
+        #    lambda: jax.random.categorical(
+        #        key2, state.legal_action_mask.astype(jnp.float32), axis=-1
+        #    ),
+        #    lambda: jax.random.categorical(key2, logits, axis=-1),
+        #)
 
         actor = state.current_player
         keys = jax.random.split(key3, batch_size)

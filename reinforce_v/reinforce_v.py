@@ -6,6 +6,7 @@ from omegaconf import OmegaConf
 import jax.numpy as jnp
 
 from .network import AZNet
+#from network import AZNet
 
 devices = jax.local_devices()
 num_devices = len(devices)

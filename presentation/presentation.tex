@@ -243,7 +243,7 @@ In alternating-turn games, a negative discount factor (\(\gamma = -1\)) is used 
 
 \medskip
 \[
-V(S_t) = r_t + \gamma \cdot V(S_{t+1}) = r_t + (-1) \cdot V(S_{t+1})
+    V(S_t) = \mathbb{E} \left[ r_{t+1} + \gamma \cdot V(S_{t+1}) \right] = \mathbb{E} \left[ r_{t+1} + (-1) \cdot V(S_{t+1}) \right]
 \]
 \begin{itemize}
     \item \(S_t\): Current state (Player 1’s turn).
@@ -364,7 +364,7 @@ V(S_t) \approx \hat{V}(S_t) = v'
     \item Policy based algorithm
     \item no MCTS
     \item on policy, batch
-    \item neural network function approximation
+    \item neural network function and policy approximation
 \end{itemize}
 \end{frame}
 
@@ -452,7 +452,7 @@ V(S_t) \approx \hat{V}(S_t) = v'
     \begin{tabular}{@{}l@{\hspace{1cm}}l@{}}
         \qquad Bootstrapping            & \textcolor{red}{\texttimes} \\[5pt]
         \qquad Function Approximation   & \textcolor{green}{\checkmark} \\[5pt]
-        \qquad Off-Policy (No Batch)    & \textcolor{red}{\texttimes}
+        \qquad Off-Policy     & \textcolor{red}{\texttimes}
     \end{tabular}
 \end{frame}
 
@@ -471,7 +471,6 @@ V(S_t) \approx \hat{V}(S_t) = v'
                 \item policy: neural network policy head
                 \item value: neural network value head
             \end{itemize}
-    \item neural network function approximation
 \end{itemize}
 \end{frame}
 
