@@ -58,7 +58,7 @@ The objective of this project is to explore different reinforcement learning alg
 \textbf{Algorithms:}
 \begin{itemize}
     \item \textbf{Naive MCTS:} A basic Monte Carlo Tree Search approach without learning.
-    \item \textbf{REINFORCE with Baseline:} A policy gradient method incorporating a baseline.
+    \item \textbf{REINFORCE Baseline:} A policy gradient method.
     \item \textbf{AlphaZero:} A self-play RL algorithm combining MCTS with deep learning.
 \end{itemize}
 \end{frame}
@@ -86,6 +86,7 @@ The objective of this project is to explore different reinforcement learning alg
     \item \textbf{Two-Player:} Players 1 and 2 alternate moves, strategies $\pi_1$ and $\pi_2$. % Corrected line
     \item \textbf{Zero-Sum:} Rewards sum to zero.  $R_1 = -R_2$. Terminal rewards: Win (+1/-1), Draw (0/0)
     \item \textbf{Perfect Information:} Both players have complete knowledge of the current state.
+    \item \textbf{Solvability:} Solved. Player 1 can always win with optimal play (Wikipedia). No readily available solvers for testing.
 \end{itemize}
 \end{frame}
 
@@ -101,7 +102,6 @@ The objective of this project is to explore different reinforcement learning alg
                 \item Storage: $4.5 \times 10^{12} \text{ states} \times 8 \text{ bytes/state} = 36 \text{ TB}$ (64 bit state representation)
             \end{itemize}
         \item \textbf{Tabular Methods:} Infeasible due to large state space.
-        \item \textbf{Solvability:} Solved. Player 1 can always win with optimal play (Wikipedia). No readily available solvers for testing.
     \end{itemize}
 \end{frame}
 
@@ -229,7 +229,7 @@ To perform a MCTS search using the MCTX library, two main functions must be prov
 
 
 \vspace{3.0em}
-The search returns \textbf{action\_weight}, representing the updated root node policy.
+    The search returns \textbf{action\_weight}, representing the updated root node policy (policy\_out).
 \end{frame}
 
 %------------------------------------------------
