@@ -24,7 +24,7 @@ Next, I implemented AlphaZero, using a ResNet for policy and value approximation
 
 4. More training experiment and manual evaluation
 
-I focused on improving the performance of the AlphaZero algorithm by experimenting with various parameters for a better training, such as batch size, the number of MCTS simulations, and the neural network architecture, including the number of channels and layers. I manually tested some games and also tested self-play between different models to evaluate their performance.
+I focused on improving the performance of the AlphaZero algorithm by experimenting with various parameters for a better training, such as batch size, the number of MCTS simulations, and the neural network architecture, including the number of channels and layers. I manually played some games and also tested self-play between different models to evaluate their performance.
 
 5. Notebook and presentation
 
