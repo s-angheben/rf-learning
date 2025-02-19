@@ -4,7 +4,7 @@ This is my project for the Markov Decision Processes and Reinforcement Learning 
 
 ## Description
 
-This project implements and trains three different reinforcement learning algorithms on the game of Connect Four: Naive Monte Carlo Tree Search (MCTS), REINFORCE with baseline, and AlphaZero. The objective is to explore the MCTS technique, compare it with policy-based methods, and apply it to a real game.
+This project focuses on the implementation and training of three distinct reinforcement learning algorithms to master the game of Connect Four: Naive Monte Carlo Tree Search (MCTS), REINFORCE with baseline, and AlphaZero. The objective is to explore the MCTS technique, compare it with policy-based methods, and apply it to a real game.
 
 
 ## Project Development Process
